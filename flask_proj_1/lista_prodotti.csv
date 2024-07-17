@@ -1,12 +1,5 @@
-code,product,price
-A123,Cappotto,200
-B345,Cappello,487
-C773,Giacca,998
-D888,Palmare,9211
-D888,Palmare,9211
-D888,Palmare,9211
-D888,Palmare,9211
-D888,Palmare,9211
-D888,Palmare,9211
-D888,Palmare,9211
-D888,Palmare,9211
+code,product,price,description
+A123,Cappotto,200,Ottimo cappotto leggero
+B345,Cappello,487,Buon cappello comodo
+C773,Giacca,998,Giacca bellissima in nylon
+D888,Palmare,9211,Usalo come vuoi tanto non funziona

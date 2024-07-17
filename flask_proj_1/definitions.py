@@ -1,15 +1,20 @@
-def generate_page(title:str, *html_tag:list[str]|str, subtitle:str|None = None):
+def generate_page(title:str, *products:list[str]|str, subtitle:str|None = None, components:list|None = None, disponibilita:dict|None = None):
   content = ''
-  if len(html_tag)>1:
-    for element in html_tag:
-      for field in element:
-        content += f'<span>{str(field)} </span>'
-      content += '<br>'
+  if len(products) > 1:
+    for i, product in enumerate(products):
+      for j, field in enumerate(product):
+        if j != 3:
+          content += f'<span>{str(field)} </span>'
+      if i > 0:
+        content += f'<i>&hearts;</i> <a style="text-decoration:none" href="/catalogo/{i}"> DETTAGLI </a><br><br><a style="text-decoration:none" href="/compra/{product[0]}"> COMPRA </a><br><br><p>DISP: {disponibilita[product[0]]}</p> <br><br>'
+      else:
+        content += '<br>'
   else:
-    for element in html_tag:
-      content += f'<span>{str(element)} </span>'
+    for product in products:
+      content += f'<span>{str(product)} </span>'
       content += '<br>'
 
+  print(content)
   return F"""<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -19,11 +24,12 @@ def generate_page(title:str, *html_tag:list[str]|str, subtitle:str|None = None):
   </head>
   <body>
     <header>
-      <h1>Buongiorno, sono {title}</h1>
+      <h1>{title}</h1>
       <h2>{subtitle}<h2>
     </header>
     <main>
       {content}
+      {''.join(components) if components else ''}
     </main>
   </body>
   </html>"""

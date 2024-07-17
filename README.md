@@ -54,3 +54,79 @@ Parametri con `tipo`:
 def show_post(post_id:int):
   return f'<h1>Post number: {post_id}</h1>'
 ```
+
+### Metodi HTTP sulle rotte
+Per aggiungere il metodo oltre a GET, come secondo parametro alla decoration si mette una lista di str con i metodi.
+
+```py
+from flask import request
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  if request.method == 'POST':
+    return '<em>Autenticazione in corso...</em>'
+  else:
+    return '<h1>Pagina di Login</h1>'
+```
+  
+Nell'oggetto Request ci sono i dati delle GET e POST:
+- `request.args` -> sono gli argomenti della query string
+- `request.data` -> il body ricevuto dal client
+- `request.headers` -> gli headers
+- `request.form` -> si usa coi form
+
+### Routes Statiche
+In flask puoi fornire direttamente dei file (immagini di solo) creando routes direttamente collegate al filesystem, puoi designare delle cartelle come asset statici.
+Si utilizza `send_from_directory`
+```py
+from flask import send_from_directory
+@app.route('/images/<path:percorso>')
+def send_images(percorso):
+  return send_from_directory('assets/img', percorso)
+```
+### L'oggetto globale g
+Oggetto globale per scambiare valori e variabili fra le routes durante una request
+```py
+from flask import g
+
+def add_to_cart(price):
+  g.totale_carrello += price
+
+@app.route('/add-to-cart', methods=['POST'])
+def pass_to_cart():
+  if request.method == 'POST':
+    add_to_cart(request.args.get('price') if 'price' in request.args.keys() else 0)
+```
+
+### Routes multiple
+Per avere più routes diverse per lo stesso risultato
+```py
+@app.route('/')
+@app.route('/home')
+def home():
+  return 'Sono la homepage.'
+```
+
+### Redirect ed errori
+Usi `redirect` per i 300 e `abort` per i 400
+```py
+from flask import redirect, abort
+@app.route('/index') # lo reinvio a '/' perche li non ce piu
+def index():
+  return redirect('/')
+
+@app.route('/privato') #qui non puoi andare
+def privato():
+  abort(401)#blocchi e mandi lo status
+
+@app.errorhandler(401)
+def unauthorized_error(error): #argomento error implicito
+  return '<h1>Non autorizzato</h1>'
+```
+### url_for
+Ti ritorna l'url che viene ritornato da una delle rotte, 
+```py
+from flask import url_for
+@app.route('/info')
+def info():
+  return url_for(nome_funzione,eventuale_param=valore)
+```
