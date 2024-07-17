@@ -33,3 +33,24 @@ Per disattivarlo
 
 ## Routes
 - I percorsi ai quali flask risponde (endpoint, url con relativi metodi)
+  
+Solo `Route`
+```python
+@app.route('/')
+def home():
+  return 'Hello world'
+```
+  
+Con `parametri`:
+```py
+@app.route('/user/<username>')
+def user(username):
+  return f'ciao {username}'
+```
+  
+Parametri con `tipo`:
+```py
+@app.route('/post/<int:post_id>')
+def show_post(post_id:int):
+  return f'<h1>Post number: {post_id}</h1>'
+```

@@ -1,4 +1,4 @@
-def generate_page(title:str, *html_tag:list[str]):
+def generate_page(title:str, *html_tag:list[str], subtitle:str|None = None):
   content = ''
   if len(html_tag)>1:
     for element in html_tag:
@@ -20,6 +20,7 @@ def generate_page(title:str, *html_tag:list[str]):
   <body>
     <header>
       <h1>Buongiorno, sono {title}</h1>
+      <h2>{subtitle}<h2>
     </header>
     <main>
       {content}
