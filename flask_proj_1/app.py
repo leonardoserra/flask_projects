@@ -12,7 +12,6 @@ def catalogo():
   with open('./lista_prodotti.csv', 'r') as prodotti:
     prodotti_estratti = [p for p in csv.reader(prodotti, delimiter=',')]
     prodotti_estratti.append([render_component('card.html')])
-    
     return generate_page('Catalogo',subtitle="PRODOTTI", *prodotti_estratti,)
 
 @app.route('/catalogo/<int:product_id>')
