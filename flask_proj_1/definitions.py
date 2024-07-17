@@ -1,4 +1,4 @@
-def generate_page(title:str, *html_tag:list[str], subtitle:str|None = None):
+def generate_page(title:str, *html_tag:list[str]|str, subtitle:str|None = None):
   content = ''
   if len(html_tag)>1:
     for element in html_tag:
@@ -27,3 +27,11 @@ def generate_page(title:str, *html_tag:list[str], subtitle:str|None = None):
     </main>
   </body>
   </html>"""
+
+
+def render_component(name_file:str):
+  with open(f'./components/{name_file}','r') as file:
+    component = file.read()
+    return component
+
+
