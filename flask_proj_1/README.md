@@ -1,0 +1,1 @@
+Just tried to create a custom function to populate dynamically a template
