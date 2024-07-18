@@ -1,5 +1,6 @@
 from flask import Flask, request, send_from_directory, redirect, abort
 from definitions import generate_page, render_component 
+from components.card_component import card_component
 import csv
 app = Flask(__name__)
 
@@ -62,6 +63,10 @@ def compra(codice):
     if disponibilita[codice] > 0:
       disponibilita[codice] -= 1
       return redirect('/catalogo')
+    
+@app.route('/card')
+def card():
+  return card_component('ciao', 'sono il content')
 
 #rotta statica per immagini
 @app.route('/images/<path:percorso_img>')
