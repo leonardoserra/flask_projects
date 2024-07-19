@@ -130,3 +130,12 @@ from flask import url_for
 def info():
   return url_for(nome_funzione,eventuale_param=valore)
 ```
+### Scaffolding
+
+-`run.py`: Il punto di ingresso dell app, crea il server, fa partire il DB con le config o per prod o dev o staging ad esempio prendendole dal config.py
+- `config.py`: il file dove sono differenziate le configurazioni (prod, staging, dev)
+- `app/`: cartella dove ci sono:
+    - `__init__.py`: creazione della app
+    - `routes.py`: contiene tutte le routes
+    - `models.py`: contiene i modelli
+    - `templates/`: cartella dove sono contenuti i templates html.
